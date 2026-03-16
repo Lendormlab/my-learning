@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leandrom</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #f0f6ff;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 56px;
+      max-width: 600px;
+      width: 90%;
+      border: 1px solid #dce8ff;
+    }
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 24px;
+      border: 3px solid #dce8ff;
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .name {
+      font-size: 32px;
+      font-weight: bold;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+    .location {
+      font-size: 14px;
+      color: #999999;
+      margin-bottom: 20px;
+    }
+    .motto {
+      font-size: 15px;
+      color: #1a73e8;
+      margin-bottom: 36px;
+      line-height: 1.6;
+      border-left: 3px solid #1a73e8;
+      padding-left: 12px;
+    }
+    .section-title {
+      font-size: 12px;
+      color: #999999;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hobbies {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .hobby-tag {
+      background-color: #e8f0fe;
+      color: #1a73e8;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    .contact {
+      font-size: 14px;
+      color: #555555;
+    }
+    .contact a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    .contact a:hover {
+      text-decoration: underline;
+    }
+    .divider {
+      height: 1px;
+      background-color: #f0f0f0;
+      margin: 28px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="avatar">
+      <img src="https://api.dicebear.com/7.x/micah/svg?seed=Leandrom" alt="avatar"/>
+    </div>
+    <div class="name">Leandrom</div>
+    <div class="location">来自日本 · 东京</div>
+    <div class="motto">但行好事，莫问前程</div>
+
+    <div class="section-title">兴趣爱好</div>
+    <div class="hobbies">
+      <span class="hobby-tag">篮球</span>
+      <span class="hobby-tag">健身</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-title">联系方式</div>
+    <div class="contact">
+      <a href="mailto:1641180792@outlook.com">1641180792@outlook.com</a>
+    </div>
+  </div>
+</body>
+</html>
