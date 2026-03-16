@@ -22,4 +22,22 @@ json格式两种：[]{}分别是对象和列表
 Day5学习内容
 注册GitHub，如何将GitHub代码导入到本地【code】，复制http链接，【git clone】
 
-Day6学习内容
+Day6—day14学习内容
+## 第二周学到的东西
+
+- HTML 基本结构：DOCTYPE、head、body
+- CSS 样式：颜色、字体、布局、居中
+- JavaScript 基础：变量、函数、操作 DOM
+- 用 AI 生成代码，学会描述需求
+- 安装 VS Code，配置开发环境
+- 部署网站到 Vercel，获得真实网址
+
+## 我做的项目
+
+- index.html：个人首页
+- profile.html：个人介绍卡片
+
+## 网站地址
+
+[在线访问]https://my-learning-phi.vercel.app/
+
