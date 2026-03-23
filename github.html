@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub 用户查询</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      display: flex;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+    .container { width: 100%; max-width: 600px; }
+    h1 { font-size: 24px; margin-bottom: 24px; color: #58a6ff; }
+    .search-bar { display: flex; gap: 10px; margin-bottom: 32px; }
+    input {
+      flex: 1;
+      padding: 10px 14px;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      color: #e6edf3;
+      font-size: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #238636;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    button:hover { background: #2ea043; }
+    .profile { display: none; margin-bottom: 32px; align-items: center; gap: 20px; }
+    .profile img { width: 80px; height: 80px; border-radius: 50%; }
+    .profile-info h2 { font-size: 20px; }
+    .profile-info p { color: #8b949e; margin-top: 4px; }
+    .repos h3 { font-size: 16px; margin-bottom: 12px; color: #8b949e; }
+    .repo-item {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .repo-item a { color: #58a6ff; text-decoration: none; font-weight: 600; }
+    .repo-item p { color: #8b949e; font-size: 13px; margin-top: 6px; }
+    .error { color: #f85149; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 GitHub 用户查询</h1>
+    <div class="search-bar">
+      <input type="text" id="username" placeholder="输入 GitHub 用户名，例如 Lendormlab" />
+      <button onclick="searchUser()">查询</button>
+    </div>
+    <div class="profile" id="profile">
+      <img id="avatar" src="" alt="avatar" />
+      <div class="profile-info">
+        <h2 id="name"></h2>
+        <p id="bio"></p>
+      </div>
+    </div>
+    <div class="repos" id="repos"></div>
+    <p class="error" id="error"></p>
+  </div>
+
+  <script>
+  const TOKEN = '';
+  const headers = { 'Authorization': `token ${TOKEN}` };
+
+  async function searchUser() {
+    const username = document.getElementById('username').value.trim();
+    const profile = document.getElementById('profile');
+    const repos = document.getElementById('repos');
+    const error = document.getElementById('error');
+
+    profile.style.display = 'none';
+    repos.innerHTML = '';
+    error.textContent = '';
+
+    if (!username) return;
+
+    try {
+      const userRes = await fetch(`https://api.github.com/users/${username}`, { headers });
+      if (!userRes.ok) throw new Error('用户不存在');
+      const user = await userRes.json();
+
+      document.getElementById('avatar').src = user.avatar_url;
+      document.getElementById('name').textContent = user.name || user.login;
+      document.getElementById('bio').textContent = user.bio || '暂无简介';
+      profile.style.display = 'flex';
+
+      const repoRes = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=5`, { headers });
+      const repoData = await repoRes.json();
+
+      repos.innerHTML = '<h3>最近更新的仓库</h3>';
+      repoData.forEach(repo => {
+        repos.innerHTML += `
+          <div class="repo-item">
+            <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+            <p>${repo.description || '暂无描述'}</p>
+          </div>`;
+      });
+
+    } catch (err) {
+      error.textContent = '❌ ' + err.message;
+    }
+  }
+
+  document.getElementById('username').addEventListener('keydown', e => {
+    if (e.key === 'Enter') searchUser();
+  });
+</script>
